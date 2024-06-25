@@ -1,14 +1,14 @@
-version: '3.8'
-
 services:
-  apigateway:
-    build: .
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5000:80"
-    depends_on:
-      - ecommerce-v2
+      - "5035:8080"
     networks:
       - ecommerce-network
+    volumes:
+      - "./ocelot.prod.json:/app/ocelot.json"
 
 networks:
   ecommerce-network:
