@@ -1,22 +1,15 @@
-version: '3.8'
-
 services:
-  apigateway:
-    build: .
+  api-gateway:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
-      - "5000:80"
-    depends_on:
-      - productservice
-      - orderservice
-    deploy:
-      replicas: 3
+      - "5035:8080"
+    networks:
+      - ecommerce-network
+    volumes:
+      - "./ocelot.prod.json:/app/ocelot.json"
 
-  productservice:
-    image: your-product-service-image
-    ports:
-      - "5001:80"
-
-  orderservice:
-    image: your-order-service-image
-    ports:
-      - "5002:80"
+networks:
+  ecommerce-network:
+    external: true
