@@ -6,17 +6,10 @@ services:
     ports:
       - "5000:80"
     depends_on:
-      - productservice
-      - orderservice
-    deploy:
-      replicas: 3
+      - ecommerce-v2
+    networks:
+      - ecommerce-network
 
-  productservice:
-    image: your-product-service-image
-    ports:
-      - "5001:80"
-
-  orderservice:
-    image: your-order-service-image
-    ports:
-      - "5002:80"
+networks:
+  ecommerce-network:
+    external: true
